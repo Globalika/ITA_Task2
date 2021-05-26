@@ -54,8 +54,7 @@ AnyType::AnyType(AnyType&& other) noexcept
 	value = std::move(other.value);
 }
 
-
-const bool AnyType::ToBool()
+bool AnyType::ToBool() const
 {
 	if (typeid(bool) == GetType())
 		return (*value).b;
@@ -63,7 +62,8 @@ const bool AnyType::ToBool()
 		throw exceptionType(GetType(), typeid(bool));
 }
 
-const char AnyType::ToChar()
+
+char AnyType::ToChar() const
 {
 	if (typeid(char) == GetType())
 		return (*value).ch;
@@ -71,7 +71,7 @@ const char AnyType::ToChar()
 		throw exceptionType(GetType(), typeid(char));
 }
 
-const int AnyType::ToInt()
+int AnyType::ToInt() const
 {
 	if (typeid(int) == GetType())
 		return (*value).i;
@@ -79,7 +79,7 @@ const int AnyType::ToInt()
 		throw exceptionType(GetType(), typeid(int));
 }
 
-const float AnyType::ToFloat()
+float AnyType::ToFloat() const
 {
 	if (typeid(float) == GetType())
 		return (*value).f;
@@ -87,7 +87,7 @@ const float AnyType::ToFloat()
 		throw exceptionType(GetType(), typeid(float));
 }
 
-const double AnyType::ToDouble()
+double AnyType::ToDouble() const
 {
 	if (typeid(double) == GetType())
 		return (*value).d;
@@ -140,7 +140,7 @@ AnyType& AnyType::Swap(AnyType& other)
 	return *this;
 }
 
-const type_info& AnyType::GetType()
+const type_info& AnyType::GetType() const
 {
 	switch (*type)
 	{

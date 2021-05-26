@@ -11,11 +11,7 @@ namespace AnytypeUnitTests
 
 		TEST_METHOD_INITIALIZE(Init)
 		{
-			anyType = new AnyType();
-		}
-		TEST_METHOD_CLEANUP(Clean)
-		{
-			delete anyType;
+			anyType = std::make_unique<AnyType>();
 		}
 		TEST_METHOD(ToBoolTest)
 		{
@@ -84,6 +80,6 @@ namespace AnytypeUnitTests
 			Assert::ExpectException<exceptionType>(func);
 		}
 	private:
-		AnyType* anyType;
+		std::unique_ptr<AnyType> anyType;
 	};
 }

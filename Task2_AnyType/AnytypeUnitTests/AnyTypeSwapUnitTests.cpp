@@ -10,15 +10,13 @@ namespace AnytypeUnitTests
 	public:
 		TEST_METHOD(SwapBoolAndIntTest)
 		{
-			AnyType* anyType1 = new AnyType(true);
-			AnyType* anyType2 = new AnyType(12);
+			std::unique_ptr<AnyType> anyType1 = std::make_unique<AnyType>(true);
+			std::unique_ptr<AnyType> anyType2 = std::make_unique<AnyType>(12);
 			Assert::AreEqual((int)AnyType::Type::BOOL, (int)(*(*anyType1).type));
 			Assert::AreEqual((int)AnyType::Type::INT, (int)(*(*anyType2).type));
 			(*anyType1).Swap(*anyType2);
 			Assert::AreEqual((int)AnyType::Type::BOOL, (int)(*(*anyType2).type));
 			Assert::AreEqual((int)AnyType::Type::INT, (int)(*(*anyType1).type));
-			delete anyType1;
-			delete anyType2;
 		}
 	};
 }

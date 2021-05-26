@@ -31,11 +31,11 @@ public:
 	AnyType(AnyType&& other) noexcept;
 	~AnyType() {}
 
-	const bool ToBool();
-	const char ToChar();
-	const int ToInt();
-	const float ToFloat();
-	const double ToDouble();
+	bool ToBool() const;
+	char ToChar() const;
+	int ToInt() const;
+	float ToFloat() const;
+	double ToDouble() const;
 
 	AnyType& operator=(bool value);
 	AnyType& operator=(char value);
@@ -44,7 +44,7 @@ public:
 	AnyType& operator=(double value);
 
 	AnyType& Swap(AnyType& otherValue);
-	const type_info& GetType();
+	const type_info& GetType() const;
 
 	enum class Type {
 		BOOL,
