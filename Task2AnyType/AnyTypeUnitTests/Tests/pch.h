@@ -7,7 +7,7 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include "..\Task2_AnyType\src\AnyType.h"
+#include "..\..\AnyType\src\AnyType.h"
 // add headers that you want to pre-compile here
 
 #endif //PCH_H

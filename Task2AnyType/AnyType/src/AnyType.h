@@ -4,7 +4,6 @@
 
 #include <string>
 #include <typeinfo> 
-#include <exception>
 #include <memory>
 
 class exceptionType
@@ -45,7 +44,6 @@ public:
 
 	AnyType& Swap(AnyType& otherValue);
 	const type_info& GetType() const;
-
 	enum class Type {
 		BOOL,
 		CHAR,
@@ -61,9 +59,9 @@ public:
 		float f;
 		double d;
 	};
-
+private:
 	std::unique_ptr<Type> type;
 	std::unique_ptr<Value> value;
 };
 
-#endif MY_ANY_TYPE_CLASS
+#endif //MY_ANY_TYPE_CLASS

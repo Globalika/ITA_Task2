@@ -5,7 +5,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace AnytypeUnitTests
 {
-	TEST_CLASS(ExceptionTypeUnitTests)
+	TEST_CLASS(AnyTypeExceptionTypeUnitTests)
 	{
 	public:
 
@@ -13,7 +13,7 @@ namespace AnytypeUnitTests
 		{
 			anyType = std::make_unique<AnyType>();
 		}
-		TEST_METHOD(ToBoolTest)
+		TEST_METHOD(ToBool_Test)
 		{
 			auto func = [&] { (*anyType).ToBool(); };
 			Assert::ExpectException<exceptionType>(func);
@@ -26,7 +26,7 @@ namespace AnytypeUnitTests
 			*anyType = 12.5;
 			Assert::ExpectException<exceptionType>(func);
 		}
-		TEST_METHOD(ToCharTest)
+		TEST_METHOD(ToChar_Test)
 		{
 			auto func = [&] { (*anyType).ToChar(); };
 			Assert::ExpectException<exceptionType>(func);
@@ -39,7 +39,7 @@ namespace AnytypeUnitTests
 			*anyType = 12.5;
 			Assert::ExpectException<exceptionType>(func);
 		}
-		TEST_METHOD(ToIntTest)
+		TEST_METHOD(ToInt_Test)
 		{
 			auto func = [&] { (*anyType).ToInt(); };
 			Assert::ExpectException<exceptionType>(func);
@@ -53,7 +53,7 @@ namespace AnytypeUnitTests
 			Assert::ExpectException<exceptionType>(func);
 
 		}
-		TEST_METHOD(ToFloatTest)
+		TEST_METHOD(ToFloat_Test)
 		{
 			auto func = [&] { (*anyType).ToFloat(); };
 			Assert::ExpectException<exceptionType>(func);
@@ -66,7 +66,7 @@ namespace AnytypeUnitTests
 			*anyType = 12.5;
 			Assert::ExpectException<exceptionType>(func);
 		}
-		TEST_METHOD(ToDoubleTest)
+		TEST_METHOD(ToDouble_Test)
 		{
 			auto func = [&] { (*anyType).ToDouble(); };
 			Assert::ExpectException<exceptionType>(func);

@@ -56,43 +56,53 @@ AnyType::AnyType(AnyType&& other) noexcept
 
 bool AnyType::ToBool() const
 {
-	if (typeid(bool) == GetType())
+	if (typeid(bool) == GetType()) {
 		return (*value).b;
-	else
+	}
+	else {
 		throw exceptionType(GetType(), typeid(bool));
+	}
 }
 
 
 char AnyType::ToChar() const
 {
-	if (typeid(char) == GetType())
+	if (typeid(char) == GetType()) {
 		return (*value).ch;
-	else
+	}
+	else {
 		throw exceptionType(GetType(), typeid(char));
+	}
 }
 
 int AnyType::ToInt() const
 {
-	if (typeid(int) == GetType())
+	if (typeid(int) == GetType()) {
 		return (*value).i;
-	else
+	}
+	else {
 		throw exceptionType(GetType(), typeid(int));
+	}
 }
 
 float AnyType::ToFloat() const
 {
-	if (typeid(float) == GetType())
+	if (typeid(float) == GetType()) {
 		return (*value).f;
-	else
+	}
+	else {
 		throw exceptionType(GetType(), typeid(float));
+	}
 }
 
 double AnyType::ToDouble() const
 {
-	if (typeid(double) == GetType())
+	if (typeid(double) == GetType()) {
 		return (*value).d;
-	else
+	}
+	else {
 		throw exceptionType(GetType(), typeid(double));
+	}
 }
 
 AnyType& AnyType::operator=(bool b)
@@ -142,6 +152,9 @@ AnyType& AnyType::Swap(AnyType& other)
 
 const type_info& AnyType::GetType() const
 {
+	if (type == nullptr) {
+		return typeid(nullptr);
+	}
 	switch (*type)
 	{
 	case Type::BOOL:
