@@ -60,8 +60,8 @@ public:
 		double d;
 	};
 private:
-	std::unique_ptr<Type> type;
-	std::unique_ptr<Value> value;
+	std::unique_ptr<Type> m_type;
+	std::unique_ptr<Value> m_value;
 };
 
 #endif //MY_ANY_TYPE_CLASS

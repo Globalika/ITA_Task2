@@ -2,62 +2,62 @@
 
 AnyType::AnyType()
 {
-	type = std::make_unique<Type>(Type(Type::NOTYPE));
-	value = std::make_unique<Value>();
-	(*value).d = 0;
+	m_type = std::make_unique<Type>(Type(Type::NOTYPE));
+	m_value = std::make_unique<Value>();
+	(*m_value).d = 0;
 }
 
 AnyType::AnyType(bool b)
 {
-	type = std::make_unique<Type>(Type(Type::BOOL));
-	value = std::make_unique<Value>();
-	(*value).b = b;
+	m_type = std::make_unique<Type>(Type(Type::BOOL));
+	m_value = std::make_unique<Value>();
+	(*m_value).b = b;
 }
 
 AnyType::AnyType(char ch)
 {
-	type = std::make_unique<Type>(Type(Type::CHAR));
-	value = std::make_unique<Value>();
-	(*value).ch = ch;
+	m_type = std::make_unique<Type>(Type(Type::CHAR));
+	m_value = std::make_unique<Value>();
+	(*m_value).ch = ch;
 }
 
 AnyType::AnyType(int i)
 {
-	type = std::make_unique<Type>(Type(Type::INT));
-	value = std::make_unique<Value>();
-	(*value).i = i;
+	m_type = std::make_unique<Type>(Type(Type::INT));
+	m_value = std::make_unique<Value>();
+	(*m_value).i = i;
 }
 
 AnyType::AnyType(float f)
 {
-	type = std::make_unique<Type>(Type(Type::FLOAT));
-	value = std::make_unique<Value>();
-	(*value).f = f;
+	m_type = std::make_unique<Type>(Type(Type::FLOAT));
+	m_value = std::make_unique<Value>();
+	(*m_value).f = f;
 }
 
 AnyType::AnyType(double d)
 {
-	type = std::make_unique<Type>(Type(Type::DOUBLE));
-	value = std::make_unique<Value>();
-	(*value).d = d;
+	m_type = std::make_unique<Type>(Type(Type::DOUBLE));
+	m_value = std::make_unique<Value>();
+	(*m_value).d = d;
 }
 
 AnyType::AnyType(AnyType& other)
 {
-	type = std::make_unique<Type>(*other.type);
-	value = std::make_unique<Value>(*other.value);
+	m_type = std::make_unique<Type>(*other.m_type);
+	m_value = std::make_unique<Value>(*other.m_value);
 }
 
 AnyType::AnyType(AnyType&& other) noexcept
 {
-	type = std::move(other.type);
-	value = std::move(other.value);
+	m_type = std::move(other.m_type);
+	m_value = std::move(other.m_value);
 }
 
 bool AnyType::ToBool() const
 {
 	if (typeid(bool) == GetType()) {
-		return (*value).b;
+		return (*m_value).b;
 	}
 	else {
 		throw exceptionType(GetType(), typeid(bool));
@@ -68,7 +68,7 @@ bool AnyType::ToBool() const
 char AnyType::ToChar() const
 {
 	if (typeid(char) == GetType()) {
-		return (*value).ch;
+		return (*m_value).ch;
 	}
 	else {
 		throw exceptionType(GetType(), typeid(char));
@@ -78,7 +78,7 @@ char AnyType::ToChar() const
 int AnyType::ToInt() const
 {
 	if (typeid(int) == GetType()) {
-		return (*value).i;
+		return (*m_value).i;
 	}
 	else {
 		throw exceptionType(GetType(), typeid(int));
@@ -88,7 +88,7 @@ int AnyType::ToInt() const
 float AnyType::ToFloat() const
 {
 	if (typeid(float) == GetType()) {
-		return (*value).f;
+		return (*m_value).f;
 	}
 	else {
 		throw exceptionType(GetType(), typeid(float));
@@ -98,7 +98,7 @@ float AnyType::ToFloat() const
 double AnyType::ToDouble() const
 {
 	if (typeid(double) == GetType()) {
-		return (*value).d;
+		return (*m_value).d;
 	}
 	else {
 		throw exceptionType(GetType(), typeid(double));
@@ -107,75 +107,75 @@ double AnyType::ToDouble() const
 
 AnyType& AnyType::operator=(bool b)
 {
-	(*value).b = b;
-	*type = Type::BOOL;
+	(*m_value).b = b;
+	*m_type = Type::BOOL;
 	return *this;
 }
 
 AnyType& AnyType::operator=(char ch)
 {
-	(*value).ch = ch;
-	*type = Type::CHAR;
+	(*m_value).ch = ch;
+	*m_type = Type::CHAR;
 	return *this;
 }
 
 AnyType& AnyType::operator=(int i)
 {
-	(*value).i = i;
-	*type = Type::INT;
+	(*m_value).i = i;
+	*m_type = Type::INT;
 	return *this;
 }
 
 AnyType& AnyType::operator=(float f)
 {
-	(*value).f = f;
-	*type = Type::FLOAT;
+	(*m_value).f = f;
+	*m_type = Type::FLOAT;
 	return *this;
 }
 
 AnyType& AnyType::operator=(double d)
 {
-	(*value).d = d;
-	*type = Type::DOUBLE;
+	(*m_value).d = d;
+	*m_type = Type::DOUBLE;
 	return *this;
 }
 
 AnyType& AnyType::Swap(AnyType& other)
 {
 	AnyType buff = *this;
-	*(this->type) = *other.type;
-	*(this->value) = *other.value;
-	*other.type = *buff.type;
-	*other.value = *buff.value;
+	*(this->m_type) = *other.m_type;
+	*(this->m_value) = *other.m_value;
+	*other.m_type = *buff.m_type;
+	*other.m_value = *buff.m_value;
 	return *this;
 }
 
 const type_info& AnyType::GetType() const
 {
-	if (type == nullptr) {
+	if (m_type == nullptr) {
 		return typeid(nullptr);
 	}
-	switch (*type)
+	switch (*m_type)
 	{
 	case Type::BOOL:
 	{
-		return typeid((*value).b);
+		return typeid((*m_value).b);
 	}
 	case Type::CHAR:
 	{
-		return typeid((*value).ch);
+		return typeid((*m_value).ch);
 	}
 	case Type::INT:
 	{
-		return typeid((*value).i);
+		return typeid((*m_value).i);
 	}
 	case Type::FLOAT:
 	{
-		return typeid((*value).f);
+		return typeid((*m_value).f);
 	}
 	case Type::DOUBLE:
 	{
-		return typeid((*value).d);
+		return typeid((*m_value).d);
 	}
 	default:
 		return typeid(nullptr);

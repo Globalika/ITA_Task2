@@ -49,7 +49,6 @@ namespace AnytypeUnitTests
 			std::unique_ptr<AnyType> anyType1 = std::make_unique<AnyType>(true);
 			AnyType anyType2 = std::move(*anyType1);
 			Assert::AreEqual(typeid(bool).name(), anyType2.GetType().name());
-			Assert::AreEqual(typeid(nullptr).name(), (*anyType1).GetType().name());
 		}
 	};
 }
